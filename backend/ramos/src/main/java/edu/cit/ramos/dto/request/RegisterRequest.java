@@ -7,7 +7,6 @@ import java.time.LocalDate;
 
 @Data
 public class RegisterRequest {
-	private String schoolId;
 	private String email;
 	private String firstName;
 	private String lastName;

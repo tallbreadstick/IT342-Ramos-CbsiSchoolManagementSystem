@@ -2,6 +2,8 @@ package edu.cit.ramos.service;
 
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -31,6 +33,8 @@ public class AuthService {
 	private final Argon2 argon2;
 	private byte[] jwtSecretBytes;
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
+
 	@Value("${jwt.expiration-ms:86400000}")
 	private long jwtExpirationMs;
 
@@ -52,20 +56,23 @@ public class AuthService {
 	public RegisterResponse register(RegisterRequest req) {
 		RegisterResponse resp = new RegisterResponse();
 
+		logger.info("Register attempt: email={}", req.getEmail());
+
 		if (userRepository.existsByEmail(req.getEmail())) {
+			logger.warn("Email already registered: {}", req.getEmail());
 			resp.setMessage("Email already registered");
 			return resp;
 		}
-		if (userRepository.existsBySchoolId(req.getSchoolId())) {
-			resp.setMessage("School ID already registered");
-			return resp;
-		}
+
+		// generate a unique school ID for the new user
+		String schoolId = generateUniqueSchoolId();
 
 		String generatedPassword = generateRandomPassword(12);
 		String hash = argon2.hash(3, 65536, 1, generatedPassword);
+		logger.debug("Generated password length={} for email={}", generatedPassword.length(), req.getEmail());
 
 		User u = new User();
-		u.setSchoolId(req.getSchoolId());
+		u.setSchoolId(schoolId);
 		u.setEmail(req.getEmail());
 		u.setFirstName(req.getFirstName());
 		u.setLastName(req.getLastName());
@@ -81,18 +88,34 @@ public class AuthService {
 		u.setAccountStatus(AccountStatusType.PENDING);
 
 		User saved = userRepository.save(u);
+		logger.info("User registered: id={}, email={}, schoolId={}", saved.getId(), saved.getEmail(), saved.getSchoolId());
 
 		resp.setId(saved.getId());
 		resp.setEmail(saved.getEmail());
+		resp.setSchoolId(saved.getSchoolId());
 		resp.setGeneratedPassword(generatedPassword);
 		resp.setMessage("Registered successfully; password returned for initial login.");
 		return resp;
 	}
 
+	private String generateUniqueSchoolId() {
+		SecureRandom rnd = new SecureRandom();
+		String id;
+		do {
+			long ts = System.currentTimeMillis() / 1000L;
+			int suffix = rnd.nextInt(9000) + 1000; // 1000-9999
+			id = String.format("CBSI-%d-%04d", ts, suffix);
+		} while (userRepository.existsBySchoolId(id));
+		return id;
+	}
+
 	public LoginResponse login(LoginRequest req) {
 		LoginResponse resp = new LoginResponse();
+
+		logger.info("Login attempt: email={}", req.getEmail());
 		Optional<User> found = userRepository.findByEmail(req.getEmail());
 		if (found.isEmpty()) {
+			logger.warn("Login failed - user not found: {}", req.getEmail());
 			resp.setSuccess(false);
 			resp.setMessage("Invalid credentials");
 			return resp;
@@ -100,6 +123,7 @@ public class AuthService {
 		User u = found.get();
 		boolean ok = argon2.verify(u.getPasswordHash(), req.getPassword());
 		if (!ok) {
+			logger.warn("Login failed - bad credentials for email={}", req.getEmail());
 			resp.setSuccess(false);
 			resp.setMessage("Invalid credentials");
 			return resp;
@@ -107,6 +131,7 @@ public class AuthService {
 
 		u.setLastLogin(OffsetDateTime.now());
 		userRepository.save(u);
+		logger.info("Login successful for user id={}, email={}", u.getId(), u.getEmail());
 
 		resp.setSuccess(true);
 		resp.setMessage("Login successful");
@@ -120,14 +145,18 @@ public class AuthService {
 				.setExpiration(java.util.Date.from(java.time.Instant.now().plusMillis(jwtExpirationMs)))
 				.signWith(Keys.hmacShaKeyFor(jwtSecretBytes), SignatureAlgorithm.HS256)
 				.compact();
+		logger.debug("JWT generated for user id={}", u.getId());
 		resp.setToken(token);
 		return resp;
 	}
 
 	public ChangePasswordResponse changePassword(ChangePasswordRequest req) {
 		ChangePasswordResponse resp = new ChangePasswordResponse();
+
+		logger.info("Change-password attempt for email={}", req.getEmail());
 		Optional<User> found = userRepository.findByEmail(req.getEmail());
 		if (found.isEmpty()) {
+			logger.warn("Change-password failed - user not found: {}", req.getEmail());
 			resp.setSuccess(false);
 			resp.setMessage("User not found");
 			return resp;
@@ -135,6 +164,7 @@ public class AuthService {
 		User u = found.get();
 		boolean ok = argon2.verify(u.getPasswordHash(), req.getOldPassword());
 		if (!ok) {
+			logger.warn("Change-password failed - incorrect old password for email={}", req.getEmail());
 			resp.setSuccess(false);
 			resp.setMessage("Old password is incorrect");
 			return resp;
@@ -145,6 +175,7 @@ public class AuthService {
 		u.setPasswordChanged(true);
 		u.setDateUpdated(OffsetDateTime.now());
 		userRepository.save(u);
+		logger.info("Password changed for user id={}, email={}", u.getId(), u.getEmail());
 
 		resp.setSuccess(true);
 		resp.setMessage("Password changed successfully");
