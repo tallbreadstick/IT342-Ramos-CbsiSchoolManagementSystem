@@ -1,13 +1,13 @@
-package edu.cbsi.portal;
+package edu.cit.ramos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CbsiSchoolManagementSystemApplication {
+public class RamosApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CbsiSchoolManagementSystemApplication.class, args);
+		SpringApplication.run(RamosApplication.class, args);
 	}
 
 }

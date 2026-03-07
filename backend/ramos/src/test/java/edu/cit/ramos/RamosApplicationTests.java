@@ -1,10 +1,10 @@
-package edu.cbsi.portal;
+package edu.cit.ramos;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CbsiSchoolManagementSystemApplicationTests {
+class RamosApplicationTests {
 
 	@Test
 	void contextLoads() {

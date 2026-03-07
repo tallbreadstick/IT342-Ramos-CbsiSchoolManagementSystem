@@ -8,10 +8,10 @@
 		<version>3.5.11</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>edu.cbsi</groupId>
-	<artifactId>portal</artifactId>
+	<groupId>edu.cit</groupId>
+	<artifactId>ramos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>CBSI School Management System</name>
+	<name>ramos</name>
 	<description>Online school management system and portal for CBSI</description>
 	<url/>
 	<licenses>
