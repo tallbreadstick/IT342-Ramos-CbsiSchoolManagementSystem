@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CBSI-Android-Client</string>
+    <string-array name="sex_options">
+        <item>MALE</item>
+        <item>FEMALE</item>
+    </string-array>
+</resources>
