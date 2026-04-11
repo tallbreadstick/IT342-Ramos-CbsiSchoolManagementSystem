@@ -1,3 +1,14 @@
+-- POSTGRESQL DATABASE SCHEMA --
+
+CREATE TYPE sex_type AS ENUM('Male', 'Female');
+
+CREATE TYPE account_status_type AS ENUM(
+    'PENDING',   -- account created by the system, pending approval by sys admin
+    'ACTIVE',    -- account is approved and usable by the user
+    'SUSPENDED', -- account is temporarily disabled
+    'ARCHIVED'   -- graduated/terminated students or staff
+);
+
 CREATE TABLE users (
     -- database-generated id
     id SERIAL PRIMARY KEY,
@@ -38,3 +49,60 @@ CREATE TRIGGER set_timestamp
 BEFORE UPDATE ON users
 FOR EACH ROW
 EXECUTE FUNCTION update_timestamp();
+
+CREATE TABLE student_records (
+    -- STUDENT RECORDS table which links a student user to their student data
+);
+
+CREATE TABLE resources (
+    -- a resource (image, file, etc) stored in the backend to srv/portal/resources/{uuid}
+
+    id VARCHAR(255) PRIMARY KEY,
+    date_uploaded TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE user_resources (
+    -- junction table linking a resource and a user
+
+    user_id INTEGER NOT NULL,
+    resource_id VARCHAR(255) NOT NULL,
+    PRIMARY KEY (user_id, resource_id),
+
+    FOREIGN KEY (user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (resource_id)
+        REFERENCES resources(id)
+        ON DELETE CASCADE
+);
+
+-- PERMISSIONS TABLE
+CREATE TABLE permissions (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL UNIQUE,  -- e.g., accounting.transactions.create
+    description TEXT,           -- optional human-readable description
+    parent_id INTEGER REFERENCES permissions(id) ON DELETE CASCADE -- for hierarchical relationships
+);
+
+-- ROLES TABLE (already defined)
+CREATE TABLE roles (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    description TEXT            -- optional description for the role
+);
+
+-- ROLE_PERMISSIONS: junction table linking roles to permissions
+CREATE TABLE role_permissions (
+    role_id INTEGER NOT NULL REFERENCES roles(id) ON DELETE CASCADE,
+    permission_id INTEGER NOT NULL REFERENCES permissions(id) ON DELETE CASCADE,
+    PRIMARY KEY (role_id, permission_id)
+);
+
+-- USER_ROLES: junction table linking users to roles
+CREATE TABLE user_roles (
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    role_id INTEGER NOT NULL REFERENCES roles(id) ON DELETE CASCADE,
+    PRIMARY KEY (user_id, role_id)
+);
+
