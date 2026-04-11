@@ -6,6 +6,9 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
+import edu.cit.ramos.entity.SexTypeConverter;
+import edu.cit.ramos.entity.AccountStatusTypeConverter;
+
 @Data
 @Entity
 @Table(name = "users")
@@ -30,8 +33,8 @@ public class User {
     @Column(name = "middle_name")
     private String middleName;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @Convert(converter = SexTypeConverter.class)
     private SexType sex;
 
     @Column(name = "date_of_birth", nullable = false)
@@ -46,8 +49,6 @@ public class User {
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 
-    @Column(name = "password_changed", nullable = false)
-    private Boolean passwordChanged = false;
 
     @Column(name = "date_created", nullable = false, updatable = false)
     private OffsetDateTime dateCreated;
@@ -55,8 +56,8 @@ public class User {
     @Column(name = "date_updated", nullable = false)
     private OffsetDateTime dateUpdated;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "account_status", nullable = false)
+    @Convert(converter = AccountStatusTypeConverter.class)
     private AccountStatusType accountStatus;
 
     @Column(name = "last_login")
