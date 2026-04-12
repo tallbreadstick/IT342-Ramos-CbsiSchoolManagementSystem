@@ -49,6 +49,9 @@ public class User {
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 
+    @Column(name = "password_changed")
+    private Boolean passwordChanged;
+
 
     @Column(name = "date_created", nullable = false, updatable = false)
     private OffsetDateTime dateCreated;

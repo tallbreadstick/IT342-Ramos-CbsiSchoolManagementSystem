@@ -6,7 +6,7 @@ export default function ChangePassword() {
   const nav = useNavigate()
   const location = useLocation()
   const state: any = location.state || {}
-  const [email, setEmail] = useState(state.email || '')
+  const [schoolId, setSchoolId] = useState(state.schoolId || '')
   const [oldPassword, setOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [msg, setMsg] = useState<string | null>(null)
@@ -15,7 +15,7 @@ export default function ChangePassword() {
     e.preventDefault()
     setMsg(null)
     try {
-      const res = await api.post('/api/auth/change-password', { email, oldPassword, newPassword })
+      const res = await api.post('/api/auth/change-password', { schoolId, oldPassword, newPassword })
       setMsg(res.data.message || 'Password changed')
       // After changing password, navigate to login
       setTimeout(() => nav('/login'), 1500)
@@ -36,8 +36,8 @@ export default function ChangePassword() {
           {msg && <div className="p-3 rounded bg-emerald-50 text-emerald-700">{msg}</div>}
 
           <div>
-            <label className="block text-sm font-medium text-slate-700">Email</label>
-            <input className="mt-1 block w-full rounded border px-3 py-2" value={email} onChange={e => setEmail(e.target.value)} type="email" required />
+            <label className="block text-sm font-medium text-slate-700">School ID</label>
+            <input className="mt-1 block w-full rounded border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cbsi-navy" value={schoolId} onChange={e => setSchoolId(e.target.value)} type="text" required />
           </div>
 
           <div>

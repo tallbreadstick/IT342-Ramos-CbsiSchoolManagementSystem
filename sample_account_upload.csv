@@ -1,0 +1,7 @@
+email,firstName,lastName,middleName,sex,dateOfBirth,permanentAddress,currentAddress,role,yearFirstEnrolled
+alice.ortega@example.com,Alice,Ortega,Marie,FEMALE,2006-08-12,123 Pine St,123 Pine St,S,2022
+benjamin.reyes@example.com,Benjamin,Reyes,Jonah,MALE,1984-03-05,45 Mango Ave,45 Mango Ave,F,
+carla.santos@example.com,Carla,Santos,Lopez,FEMALE,1992-11-20,78 Palm Rd,78 Palm Rd,A,
+david.lopez@example.com,David,Lopez,Antonio,MALE,2005-01-15,9 Oak Ln,9 Oak Ln,S,2021
+elaine.cruz@example.com,Elaine,Cruz,M.,FEMALE,1978-06-30,200 River Dr,200 River Dr,F,
+frank.garcia@example.com,Frank,Garcia,,MALE,1989-09-09,56 Hill St,56 Hill St,A,

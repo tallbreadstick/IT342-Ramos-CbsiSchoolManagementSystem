@@ -1,28 +1,88 @@
 @import "tailwindcss";
 
-/* Global layout */
-:root {
-  --header-height: 72px;
-  --card-radius: 12px;
-  --accent: #0ea5e9;
-  --muted: #64748b;
-}
-
-* { box-sizing: border-box; }
-html, body, #root { height: 100%; }
+/* DO NOT EDIT THESE VALUES */
 body {
+  width: 100vw;
+  height: 100vh;
   margin: 0;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: #f4f6f9; /* light neutral */
-  color: #102028; /* dark text for readability */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* make header fixed and reserve space for it */
-main { padding-top: var(--header-height); }
+#root {
+  width: 100%;
+  height: 100%;
+}
+/* DO NOT EDIT THESE VALUES */
 
-/* container utility */
-.container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 1rem; }
+/* Visual refresh helpers */
+.app-root {
+  min-height: 100vh;
+  background-color: #f1f5f9; /* soft gray */
+}
+
+.card {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+.hero {
+  padding: 3rem 1.25rem;
+  text-align: center;
+}
+.hero h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--cbsi-navy);
+}
+.hero p { color: #475569; margin-top: 0.5rem }
+
+.btn {
+  display: inline-block;
+  background: var(--cbsi-navy);
+  color: #fff;
+  padding: 0.5rem 0.85rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background .15s ease, box-shadow .12s ease;
+  box-shadow: 0 6px 18px rgba(8,58,119,0.08);
+}
+.btn:hover { background: #062c58 }
+.btn.secondary { background: var(--cbsi-red); color: #fff; box-shadow: 0 6px 18px rgba(215,35,42,0.06) }
+
+/* modest table polish */
+.table-container { padding: 0.75rem }
+.table-container table thead th { text-transform: uppercase; letter-spacing: .02em }
+
+:root {
+  --cbsi-navy: #083a77; /* deep navy from logo */
+  --cbsi-red: #d7232a;  /* ribbon red */
+  --cbsi-gold: #f6b31c; /* torch/gold accent */
+  --cbsi-muted: #6b7280;
+}
+
+/* Header and nav accents */
+header { border-color: rgba(8,58,119,0.08) }
+header .text-indigo-600, header .text-lg, header .font-bold { color: var(--cbsi-navy) }
+nav a:hover { background: rgba(8,58,119,0.04) }
+
+/* Card accent: subtle gold left border */
+.card { border-left: 4px solid rgba(246,179,28,0.08) }
+
+/* Hero tweaks */
+.hero.card { background: linear-gradient(180deg, rgba(255,255,255,0.98), #fff); }
+.hero .actions .btn.secondary { background: transparent; color: var(--cbsi-navy); border: 1px solid rgba(8,58,119,0.08); box-shadow: none }
+
+/* Table header styling */
+.table-container table thead { background: rgba(8,58,119,0.03) }
+.table-container table thead th { color: var(--cbsi-navy) }
+
+/* Form labels and inputs */
+label { color: var(--cbsi-navy) }
+input, select, textarea { border-color: rgba(15,23,42,0.06) }
+
+/* segmented control for single/batch */
+.seg-btn { padding: 0.5rem 1rem; border-radius: 0.375rem; }
+.seg-active { background: var(--cbsi-navy); color: #fff }
 
 

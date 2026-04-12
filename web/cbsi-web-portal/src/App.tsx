@@ -2,8 +2,9 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import './index.css'
 import Header from './components/Header'
 import Login from './pages/Login'
-import Register from './pages/Register'
 import ChangePassword from './pages/ChangePassword'
+import AccountCreation from './pages/AccountCreation'
+import UserRecords from './pages/UserRecords'
 
 function Home() {
   return (
@@ -13,7 +14,7 @@ function Home() {
         <p>Manage students, staff, and school operations.</p>
         <div className="actions">
           <Link to="/login" className="btn">Sign In</Link>
-          <Link to="/register" className="btn secondary">Register</Link>
+          <Link to="/account-creation" className="btn secondary">Create Account</Link>
         </div>
       </div>
     </main>
@@ -28,7 +29,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/account-creation" element={<AccountCreation />} />
+          <Route path="/user-records" element={<UserRecords />} />
           <Route path="/change-password" element={<ChangePassword />} />
         </Routes>
       </div>
