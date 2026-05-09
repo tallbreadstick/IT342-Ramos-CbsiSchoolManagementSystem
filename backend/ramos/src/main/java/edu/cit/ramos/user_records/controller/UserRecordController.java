@@ -1,7 +1,7 @@
-package edu.cit.ramos.controller;
+package edu.cit.ramos.user_records.controller;
 
-import edu.cit.ramos.dto.response.UserRecordResponse;
-import edu.cit.ramos.service.UserRecordService;
+import edu.cit.ramos.user_records.dto.response.UserRecordResponse;
+import edu.cit.ramos.user_records.service.UserRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

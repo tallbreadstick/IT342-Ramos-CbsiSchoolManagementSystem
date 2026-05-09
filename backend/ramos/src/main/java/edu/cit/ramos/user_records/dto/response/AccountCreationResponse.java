@@ -1,4 +1,4 @@
-package edu.cit.ramos.dto.response;
+package edu.cit.ramos.user_records.dto.response;
 
 import lombok.Data;
 

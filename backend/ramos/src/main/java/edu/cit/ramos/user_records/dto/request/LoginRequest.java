@@ -1,4 +1,4 @@
-package edu.cit.ramos.dto.request;
+package edu.cit.ramos.user_records.dto.request;
 
 import lombok.Data;
 

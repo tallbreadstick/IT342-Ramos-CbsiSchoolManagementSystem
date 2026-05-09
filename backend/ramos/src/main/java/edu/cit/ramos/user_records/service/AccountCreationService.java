@@ -1,10 +1,11 @@
-package edu.cit.ramos.service;
+package edu.cit.ramos.user_records.service;
 
-import edu.cit.ramos.dto.request.AccountCreationRequest;
-import edu.cit.ramos.dto.response.AccountCreationResponse;
-import edu.cit.ramos.entity.AccountStatusType;
-import edu.cit.ramos.entity.User;
-import edu.cit.ramos.repository.UserRepository;
+import edu.cit.ramos.user_records.dto.request.AccountCreationRequest;
+import edu.cit.ramos.user_records.dto.response.AccountCreationResponse;
+import edu.cit.ramos.user_records.entity.AccountStatusType;
+import edu.cit.ramos.user_records.entity.User;
+import edu.cit.ramos.user_records.entity.SexType;
+import edu.cit.ramos.user_records.repository.UserRepository;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import org.apache.poi.ss.usermodel.Row;
@@ -195,7 +196,7 @@ public class AccountCreationService {
         // sex as 'Male' or 'Female'
         if (cols.length > 4) {
             String s = cols[4].trim();
-            try { req.setSex(edu.cit.ramos.entity.SexType.fromString(s)); } catch (Exception e) { req.setSex(null); }
+            try { req.setSex(SexType.fromString(s)); } catch (Exception e) { req.setSex(null); }
         }
         if (cols.length > 5) {
             try { req.setDateOfBirth(java.time.LocalDate.parse(cols[5].trim())); } catch (Exception e) { req.setDateOfBirth(null); }

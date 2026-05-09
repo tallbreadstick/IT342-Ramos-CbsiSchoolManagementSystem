@@ -1,4 +1,4 @@
-package edu.cit.ramos.entity;
+package edu.cit.ramos.user_records.entity;
 
 public enum AccountStatusType {
     PENDING("PENDING"),

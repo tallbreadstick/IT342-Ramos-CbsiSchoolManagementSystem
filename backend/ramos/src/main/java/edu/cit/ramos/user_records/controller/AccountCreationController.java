@@ -1,8 +1,8 @@
-package edu.cit.ramos.controller;
+package edu.cit.ramos.user_records.controller;
 
-import edu.cit.ramos.dto.request.AccountCreationRequest;
-import edu.cit.ramos.dto.response.AccountCreationResponse;
-import edu.cit.ramos.service.AccountCreationService;
+import edu.cit.ramos.user_records.dto.request.AccountCreationRequest;
+import edu.cit.ramos.user_records.dto.response.AccountCreationResponse;
+import edu.cit.ramos.user_records.service.AccountCreationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

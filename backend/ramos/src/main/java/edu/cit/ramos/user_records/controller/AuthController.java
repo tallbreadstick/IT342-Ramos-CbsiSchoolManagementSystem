@@ -1,10 +1,10 @@
-package edu.cit.ramos.controller;
+package edu.cit.ramos.user_records.controller;
 
-import edu.cit.ramos.dto.request.ChangePasswordRequest;
-import edu.cit.ramos.dto.request.LoginRequest;
-import edu.cit.ramos.dto.response.ChangePasswordResponse;
-import edu.cit.ramos.dto.response.LoginResponse;
-import edu.cit.ramos.service.AuthService;
+import edu.cit.ramos.user_records.dto.request.ChangePasswordRequest;
+import edu.cit.ramos.user_records.dto.request.LoginRequest;
+import edu.cit.ramos.user_records.dto.response.ChangePasswordResponse;
+import edu.cit.ramos.user_records.dto.response.LoginResponse;
+import edu.cit.ramos.user_records.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

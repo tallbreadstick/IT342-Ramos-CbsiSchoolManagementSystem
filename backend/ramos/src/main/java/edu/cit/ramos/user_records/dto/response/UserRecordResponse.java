@@ -1,7 +1,7 @@
-package edu.cit.ramos.dto.response;
+package edu.cit.ramos.user_records.dto.response;
 
-import edu.cit.ramos.entity.AccountStatusType;
-import edu.cit.ramos.entity.SexType;
+import edu.cit.ramos.user_records.entity.AccountStatusType;
+import edu.cit.ramos.user_records.entity.SexType;
 import lombok.Data;
 
 import java.time.OffsetDateTime;

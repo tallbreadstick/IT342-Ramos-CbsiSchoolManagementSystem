@@ -1,4 +1,4 @@
-package edu.cit.ramos.service;
+package edu.cit.ramos.user_records.service;
 
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
@@ -9,17 +9,16 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
-import edu.cit.ramos.dto.request.ChangePasswordRequest;
-import edu.cit.ramos.dto.request.LoginRequest;
-import edu.cit.ramos.dto.response.ChangePasswordResponse;
-import edu.cit.ramos.dto.response.LoginResponse;
-import edu.cit.ramos.entity.AccountStatusType;
-import edu.cit.ramos.entity.User;
-import edu.cit.ramos.repository.UserRepository;
+import edu.cit.ramos.user_records.dto.request.ChangePasswordRequest;
+import edu.cit.ramos.user_records.dto.request.LoginRequest;
+import edu.cit.ramos.user_records.dto.response.ChangePasswordResponse;
+import edu.cit.ramos.user_records.dto.response.LoginResponse;
+import edu.cit.ramos.user_records.entity.AccountStatusType;
+import edu.cit.ramos.user_records.entity.User;
+import edu.cit.ramos.user_records.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.SecureRandom;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 

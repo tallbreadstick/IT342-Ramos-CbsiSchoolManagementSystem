@@ -1,4 +1,4 @@
-package edu.cit.ramos.entity;
+package edu.cit.ramos.user_records.entity;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

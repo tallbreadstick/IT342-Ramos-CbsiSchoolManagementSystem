@@ -1,6 +1,6 @@
-package edu.cit.ramos.dto.request;
+package edu.cit.ramos.user_records.dto.request;
 
-import edu.cit.ramos.entity.SexType;
+import edu.cit.ramos.user_records.entity.SexType;
 import lombok.Data;
 
 import java.time.LocalDate;

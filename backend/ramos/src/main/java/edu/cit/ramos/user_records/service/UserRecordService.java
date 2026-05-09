@@ -1,14 +1,14 @@
-package edu.cit.ramos.service;
+package edu.cit.ramos.user_records.service;
 
-import edu.cit.ramos.dto.response.UserRecordResponse;
-import edu.cit.ramos.entity.User;
-import edu.cit.ramos.repository.UserRepository;
+import edu.cit.ramos.user_records.dto.response.UserRecordResponse;
+import edu.cit.ramos.user_records.entity.User;
+import edu.cit.ramos.user_records.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import edu.cit.ramos.entity.AccountStatusType;
+import edu.cit.ramos.user_records.entity.AccountStatusType;
 
 @Service
 public class UserRecordService {

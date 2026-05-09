@@ -1,12 +1,12 @@
-package edu.cit.ramos.repository;
+package edu.cit.ramos.user_records.repository;
 
-import edu.cit.ramos.entity.User;
+import edu.cit.ramos.user_records.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.List;
-import edu.cit.ramos.entity.AccountStatusType;
+import edu.cit.ramos.user_records.entity.AccountStatusType;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {

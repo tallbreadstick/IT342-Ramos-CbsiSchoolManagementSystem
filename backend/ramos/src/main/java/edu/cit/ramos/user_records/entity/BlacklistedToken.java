@@ -1,4 +1,4 @@
-package edu.cit.ramos.entity;
+package edu.cit.ramos.user_records.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

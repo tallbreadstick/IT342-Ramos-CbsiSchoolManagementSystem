@@ -1,13 +1,10 @@
-package edu.cit.ramos.entity;
+package edu.cit.ramos.user_records.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-
-import edu.cit.ramos.entity.SexTypeConverter;
-import edu.cit.ramos.entity.AccountStatusTypeConverter;
 
 @Data
 @Entity
